@@ -5,6 +5,7 @@ import './App.css';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import ProtectedRoute from './ProtectedRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [isAuth, setIsAuth]=useState(false);

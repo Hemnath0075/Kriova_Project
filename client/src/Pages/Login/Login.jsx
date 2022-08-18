@@ -1,12 +1,15 @@
-import React from 'react'
-
+import React from "react";
+import NonLoggedHeader from "../../Components/NonLoggedHeader/NonLoggedHeader";
+import "./Login.css"
 function Login() {
-
   return (
-    <div>This is login Page
-        <button>Login</button>
+    <div className="">
+      <NonLoggedHeader />
+      <div className="image-container">
+        
+      </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
