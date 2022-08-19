@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 const EmployeeSchema = new mongoose.Schema({
     EmpId:{
         type:Number,
-        required:[true,"Id is not assigned"],
-        maxlength:50
     },
     email:{
         type:String,
@@ -51,7 +49,6 @@ const EmployeeSchema = new mongoose.Schema({
     },
     pincode:{
         type:String,
-        required:[true,"street is required"]
     }
 })
 

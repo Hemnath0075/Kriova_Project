@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import NonLoggedHeader from "../../Components/NonLoggedHeader/index";
 import { GetUser, loginUser, signupUser, SignupUser, UserStatus } from "../../Redux/features/user";
 import "./Signup.css";
 import { useDispatch, useSelector } from "react-redux";
 
 function Signup() {
+  const history=useHistory();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -19,14 +20,12 @@ function Signup() {
   });
   const loggeduser = useSelector(GetUser);
   const status = useSelector(UserStatus);
-  console.log(loggeduser);
+  // console.log(loggeduser);
   const { email, password, empName, dob, street, city, state, country, phno } = user;
   const dispatch = useDispatch();
   useEffect(() => {
     document.title = "Kriova / Signup";
-    if (status === "success") {
-      <Redirect to={"/login"} />;
-    }
+
   }, [status]);
 
   const onChange = (e) => {
@@ -35,6 +34,7 @@ function Signup() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    history.push("/login");
     dispatch(signupUser(user));
   };
   return (
@@ -156,7 +156,7 @@ function Signup() {
                     type="submit"
                     name="login"
                     id="login"
-                    value="Log in"
+                    value="Sign Up"
                     className="cursor-pointer bg-blue text-white hover:bg-opacity-90 font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:bg-opacity-90"
                   />
                 </div>

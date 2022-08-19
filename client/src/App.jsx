@@ -8,9 +8,16 @@ import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Signup/Signup";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
+// import { UserStatus } from "./Redux/features/user";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+  const data=useSelector((state)=>state.user);
+  console.log("the data of status is",data);
+  if(data==="success"){
+    setIsAuth(true);
+  }
   return (
     <div className="App">
       <Router>
