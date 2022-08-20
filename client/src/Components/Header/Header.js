@@ -9,6 +9,7 @@ import './Header.css';
 function Header() {
   const dispatch = useDispatch();
   const Logout = ()=>{
+    localStorage.clear();
     dispatch(logout()); 
   }
 

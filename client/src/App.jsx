@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProtectedRoute from "./ProtectedRoute";
@@ -9,15 +9,22 @@ import Signup from "./Pages/Signup/Signup";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 // import { UserStatus } from "./Redux/features/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { isUserLoggedIn } from "./Redux/features/user";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-  const data=useSelector((state)=>state.user);
-  console.log("the data of status is",data);
-  if(data==="success"){
-    setIsAuth(true);
-  }
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const isAuth = useSelector((state)=>state.users.status)
+  useEffect(()=>{
+    const id=localStorage.getItem("user");
+    console.log(id);
+    if(id){
+      console.log("the code is working")
+      console.log(isAuth)
+      dispatch(isUserLoggedIn({id:id}))
+    }
+  })
   return (
     <div className="App">
       <Router>
@@ -26,7 +33,7 @@ function App() {
           <Route exact path="/signup"  component={Signup}></Route>
           <Route exact path="/forgotpassword"  component={ForgotPassword}></Route>
           <Route exact path="/resetpassword/:id"  component={ResetPassword}></Route>
-          <ProtectedRoute exact path="/home" component={Home} isAuth={isAuth} />
+          <ProtectedRoute exact path="/home" component={Home}/>
         </Switch>
       </Router>
     </div>

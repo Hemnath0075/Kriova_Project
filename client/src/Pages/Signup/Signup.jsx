@@ -25,7 +25,6 @@ function Signup() {
   const dispatch = useDispatch();
   useEffect(() => {
     document.title = "Kriova / Signup";
-
   }, [status]);
 
   const onChange = (e) => {
@@ -36,6 +35,7 @@ function Signup() {
     e.preventDefault();
     history.push("/login");
     dispatch(signupUser(user));
+    window.location.reload();
   };
   return (
     <div className="">

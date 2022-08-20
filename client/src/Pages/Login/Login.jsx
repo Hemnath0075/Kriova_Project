@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link,  useHistory } from "react-router-dom";
 import NonLoggedHeader from "../../Components/NonLoggedHeader/index";
-import { GetUser, loginUser, UserStatus } from "../../Redux/features/user";
+import {  isUserLoggedIn, loginUser, UserStatus } from "../../Redux/features/user";
 import "./Login.css";
 import {useDispatch,useSelector} from 'react-redux';
 
@@ -12,17 +12,20 @@ function Login() {
     email: "",
     password: "",
   });
-  const loggeduser=useSelector(GetUser);
-  const status=useSelector(UserStatus);
+  const loggeduser=useSelector((state)=>state.users.user);
   console.log(loggeduser);
+  const status=useSelector(UserStatus);
   const { email, password } = user;
   const dispatch = useDispatch();
-  // useEffect(() => {
-    // document.title = "Kriova / Login";
-    // if (status === "success") {
-    //   <Redirect to={'/home'}/>
-    // }
-  // }, [status]);
+  useEffect(() => {
+    document.title = "Kriova / Login";
+    const id=localStorage.getItem("user");
+    console.log(id);
+    if(id!==null){
+      dispatch(isUserLoggedIn({id:id}))
+      history.push("/home");
+    }
+  }, [history,dispatch]);
   
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -32,7 +35,7 @@ function Login() {
     e.preventDefault();
     dispatch(loginUser(user));
     history.push('/home')
-    // console.log(user)
+    window.location.reload();
   };
   return (
     <div className="">

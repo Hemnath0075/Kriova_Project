@@ -4,22 +4,38 @@ import "./Home.css";
 import Badge from "react-bootstrap/Badge";
 import Avatar from "../../assets/user.png";
 import Card from "react-bootstrap/Card";
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import {CategoryScale} from 'chart.js'; 
+import { CategoryScale } from "chart.js";
+import { useSelector } from "react-redux";
 Chart.register(CategoryScale);
 
 function Home() {
+  const loggeduser = useSelector((state) => state.users.user);
+  console.log(loggeduser);
   const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
     datasets: [
       {
         label: "Company Production",
-        data: [33, 53, 85, 41, 44, 65,67,69,73,79,85,90],
+        data: [33, 53, 85, 41, 44, 65, 67, 69, 73, 79, 85, 90],
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
         borderColor: "rgba(75,192,192,1)",
-      }
+      },
     ],
   };
   return (
@@ -51,25 +67,29 @@ function Home() {
                 Name:<h1 className="ml-12 text-lg inline">{"Hemnath"}</h1>
               </p>
               <p>
-                DOB:<h1 className="ml-12 text-lg inline">{}</h1>
+                DOB:<h1 className="ml-12 text-lg inline">{loggeduser.dob}</h1>
               </p>
               <p>
-                Email:<h1 className="ml-12 text-lg inline">{}</h1>
+                Email:
+                <h1 className="ml-12 text-lg inline">{loggeduser.email}</h1>
               </p>
               <p>
-                Street:<h1 className="ml-12 text-lg inline">{}</h1>
+                Street:
+                <h1 className="ml-12 text-lg inline">{loggeduser.street}</h1>
               </p>
               <p>
-                City:<h1 className="ml-12 text-lg inline">{}</h1>
+                City:<h1 className="ml-12 text-lg inline">{loggeduser.city}</h1>
               </p>
               <p>
-                State:<h1 className="ml-12 text-lg inline">{}</h1>
+                State:
+                <h1 className="ml-12 text-lg inline">{loggeduser.state}</h1>
               </p>
               <p>
-                Cuntry:<h1 className="ml-12 text-lg inline">{}</h1>
+                Country:
+                <h1 className="ml-12 text-lg inline">{loggeduser.country}</h1>
               </p>
               <p>
-                Pincode:<h1 className="ml-12 text-lg inline">{}</h1>
+                Pincode:<h1 className="ml-12 text-lg inline">{600112}</h1>
               </p>
             </div>
           </div>
